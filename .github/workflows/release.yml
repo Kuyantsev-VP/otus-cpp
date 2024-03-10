@@ -1,4 +1,4 @@
-name: 'C++ CI'
+name: 'C++ Ip filter'
 
 on:
   push:
