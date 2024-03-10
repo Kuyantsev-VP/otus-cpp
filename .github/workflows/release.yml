@@ -3,7 +3,7 @@ name: 'C++ Ip filter'
 on:
   push:
     branches:
-      - hw1-actions
+      - hw2-ip-filter
 
 jobs:
   build:
