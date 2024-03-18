@@ -23,6 +23,8 @@ target_include_directories(ip_filter
     PRIVATE "${CMAKE_BINARY_DIR}"
 )
 
+FILE(COPY ip_filter.tsv DESTINATION "${CMAKE_BINARY_DIR}")
+
 target_link_libraries(ip_filter PRIVATE
     ip_address
     utils
