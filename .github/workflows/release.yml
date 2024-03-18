@@ -19,6 +19,7 @@ jobs:
       # - run: cmake --build . --target test
       - run: cmake --build . --target package
       - run: |
+          # Testing ip_filter on resource file...
           actual_hash_sum=$(cat ip_filter.tsv | ./ip_filter | md5sum)
           expected_hash_sum="24e7a7b2270daee89c64d3ca5fb3da1a  -"
           [ "$actual_hash_sum" = "$expected_hash_sum" ] || (echo "test failed: '$actual_hash_sum'!='$expected_hash_sum'" && exit 1)
