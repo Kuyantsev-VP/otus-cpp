@@ -20,21 +20,17 @@ int main() {
       break;
     std::vector<std::string> tokens;
     split(line, '\t', tokens);
-    auto a = IPAddress::fromString(tokens[0]);
-    ip_addresses.push_back(a);
+    auto ip_address = IPAddress::fromString(tokens[0]);
+    ip_addresses.push_back(ip_address);
   }
-  std::sort(
-      ip_addresses.begin(), ip_addresses.end(),
-      [](IPAddress &a, IPAddress &b) { return a.toNumber() > b.toNumber(); });
 
-  auto filter_I = [](IPAddress &a) { return true; };
-  auto filter_II = [](IPAddress &a) { return std::get<0>(a) == 1; };
-  auto filter_III = [](IPAddress &a) {
-    return std::get<0>(a) == 46 && std::get<1>(a) == 70;
-  };
-  auto filter_IV = [](IPAddress &a) {
-    return std::get<0>(a) == 46 || std::get<1>(a) == 46 || std::get<2>(a) == 46 ||
-          std::get<3>(a) == 46;
+  std::sort(ip_addresses.begin(), ip_addresses.end());
+
+  auto filter_I = [](const IPAddress &a) { return true; };
+  auto filter_II = [](const IPAddress &a) { return a[0] == 1; };
+  auto filter_III = [](const IPAddress &a) { return a[0] == 46 && a[1] == 70; };
+  auto filter_IV = [](const IPAddress &a) {
+    return a[0] == 46 || a[1] == 46 || a[2] == 46 || a[3] == 46;
   };
 
   print_filtered<IPAddress>(ip_addresses, filter_I);

@@ -8,15 +8,11 @@
 #include <tuple>
 #include <vector>
 
-
-
-void split(const std::string &str, char sep,
-           std::vector<std::string> &seglist);
-
+void split(const std::string &str, char sep, std::vector<std::string> &seglist);
 
 template <typename T>
-void print_filtered(std::vector<T> container, bool filter(T &a)) {
-  std::for_each(container.begin(), container.end(), [&filter](T &a) {
+void print_filtered(const std::vector<T> &container, bool filter(const T& a)) {
+  std::for_each(container.begin(), container.end(), [&filter](const T& a) {
     if (filter(a))
       std::cout << a << std::endl;
   });

@@ -9,22 +9,22 @@
 #include <vector>
 
 
-typedef size_t byte;
-typedef std::tuple<byte, byte, byte, byte> ip_tuple;
+typedef int byte;
 
 
-class IPAddress : public ip_tuple {
+class IPAddress : std::array<byte, 4> {
 public:
-  IPAddress(int byte_1, int byte_2, int byte_3, int byte_4);
-  IPAddress &operator=(IPAddress &&);
-  IPAddress(const IPAddress &);
+  IPAddress(int a, int b, int c, int d);
   static IPAddress fromString(const std::string &ip_address_str);
-  uint64_t toNumber();
-
+  const int& operator[](std::size_t index) const {
+      return std::array<byte, 4>::operator[](index);
+  }
   friend std::ostream &operator<<(std::ostream &stream,
                                   const IPAddress &ip_address) {
-    stream << std::get<0>(ip_address) << '.' << std::get<1>(ip_address) << '.'
-           << std::get<2>(ip_address) << '.' << std::get<3>(ip_address);
+    stream << ip_address[0] << '.' << ip_address[1] << '.'
+           << ip_address[2] << '.' << ip_address[3];
     return stream;
   }
+  // // Overload comparison operators
+  bool operator<(const IPAddress& other) const;
 };
